@@ -17,5 +17,8 @@ var PhoneListener = function() {};
 
 		if (!window.plugins) window.plugins = {};
 		window.plugins.PhoneListener = new PhoneListener();
+
+		if (!cordova.plugins) cordova.plugins = {};
+		cordova.plugins.PhoneListener = window.plugins.PhoneListener;
 	});
 });
