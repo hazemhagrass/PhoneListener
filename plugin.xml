@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="com.badrit.ContactPicker"
+        version="0.2.0">
+    <author>Hazem Hagrass</author>
+    <name>PhoneListener</name>
+    <description>Cordova PhoneListener Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,phonelistener</keywords>
+    <dependency id="cordova-plugin-device" version=">=1.0.0" />
+
+    <js-module src="www/PhoneListener.js" name="PhoneListener">
+        <clobbers target="navigator.PhoneListener" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="PhoneListener">
+                <param name="android-package" value="com.badrit.PhoneListener.PhoneListener"/>
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+        </config-file>
+
+        <source-file src="src/android/PhoneListener.java" target-dir="src/com/badrit/PhoneListener/" />
+
+    </platform>
+
+</plugin>
