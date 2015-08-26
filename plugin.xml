@@ -9,7 +9,6 @@
     <description>Cordova PhoneListener Plugin</description>
     <license>Apache 2.0</license>
     <keywords>cordova,phonelistener</keywords>
-    <dependency id="cordova-plugin-device" version=">=1.0.0" />
 
     <js-module src="www/PhoneListener.js" name="PhoneListener">
         <clobbers target="navigator.PhoneListener" />
