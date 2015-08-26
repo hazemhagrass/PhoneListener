@@ -7,7 +7,8 @@ var PhoneListener = function() {};
 		cordova.exec(success, failure, "PhoneListener", "monitor_signal", []);
 	};
 
-// Plug in to Cordova
+
+	// Plug in to Cordova
 	cordova.addConstructor(function() {
 
 		if (!window.Cordova) {
@@ -18,7 +19,5 @@ var PhoneListener = function() {};
 		if (!window.plugins) window.plugins = {};
 		window.plugins.PhoneListener = new PhoneListener();
 
-		if (!cordova.plugins) cordova.plugins = {};
-		cordova.plugins.PhoneListener = window.plugins.PhoneListener;
 	});
 });
