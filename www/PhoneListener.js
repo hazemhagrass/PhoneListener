@@ -4,7 +4,7 @@ cordova.define("com.badrit.PhoneListener.PhoneListener", function(require, expor
 var PhoneListener = function() {};
 
 	PhoneListener.prototype.monitorSignal = function(success, failure) {
-		cordova.exec(success, failure, "PhoneListener", "monitorSignal", []);
+		cordova.exec(success, failure, "PhoneListener", "monitor_signal", []);
 	};
 
 // Plug in to Cordova
