@@ -18,7 +18,7 @@
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="PhoneListener">
-                <param name="android-package" value="com.badrit.PhoneListener"/>
+                <param name="android-package" value="com.badrit.PhoneListener.PhoneListener"/>
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/*">

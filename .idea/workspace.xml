@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f418cdfe-c2f5-4c53-9cd7-f224810df999" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugin.xml" afterPath="$PROJECT_DIR$/plugin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PhoneListener.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/plugin.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.36363637">
-              <caret line="20" column="77" selection-start-line="20" selection-start-column="77" selection-end-line="20" selection-end-column="77" />
+              <caret line="20" column="91" selection-start-line="20" selection-start-column="78" selection-end-line="20" selection-end-column="91" />
               <folding />
             </state>
           </provider>
@@ -296,7 +295,7 @@
     <entry file="file://$PROJECT_DIR$/plugin.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36363637">
-          <caret line="20" column="77" selection-start-line="20" selection-start-column="77" selection-end-line="20" selection-end-column="77" />
+          <caret line="20" column="91" selection-start-line="20" selection-start-column="78" selection-end-line="20" selection-end-column="91" />
           <folding />
         </state>
       </provider>
