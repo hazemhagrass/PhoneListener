@@ -50,6 +50,7 @@ public class PhoneListener extends CordovaPlugin {
 
                 try {
                     data = new JSONObject();
+                    data.put("is_gsm", signalStrength.isGsm());
                     data.put("cdma_strength", cdmaStrength);
                     data.put("cdma_dbm", signalStrength.getCdmaDbm());
                     data.put("cdma_ecio", signalStrength.getCdmaEcio());
