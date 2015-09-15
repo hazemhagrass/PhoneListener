@@ -18,19 +18,24 @@ public class PhoneListener extends CordovaPlugin {
     private Context context;
     private CallbackContext callbackContext;
     private JSONObject data;
+    private String carrierName;
 
     @Override
     public boolean execute(String action, JSONArray data,
                            CallbackContext callbackContext) {
-        this.callbackContext = callbackContext;
-        this.context = cordova.getActivity().getApplicationContext();
-
         if (action.equals("monitor_signal")) {
+            this.callbackContext = callbackContext;
+            this.context = cordova.getActivity().getApplicationContext();
             monitorSignal();
 
             PluginResult r = new PluginResult(PluginResult.Status.OK, data);
             r.setKeepCallback(true);
             callbackContext.sendPluginResult(r);
+        }
+
+        if (action.equals("carrier_name")) {
+            getCarrierName();
+            callbackContext.success(carrierName);
         }
 
         return true;
@@ -76,8 +81,10 @@ public class PhoneListener extends CordovaPlugin {
         Toast.makeText(context, "Monitoring Start", Toast.LENGTH_SHORT).show();
     }
 
-    public void getNetworkSignalStrength()
-    {
+    public void getCarrierName(){
+        TelephonyManager phonyManager  = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+        carrierName = phonyManager.getNetworkOperatorName();
 
+        Log.d("carrierName", carrierName);
     }
 }
