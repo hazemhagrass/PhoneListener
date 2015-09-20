@@ -4,8 +4,8 @@ PhoneListener.prototype.monitorSignal = function(success, failure) {
 	cordova.exec(success, failure, "PhoneListener", "monitor_signal", []);
 };
 
-PhoneListener.prototype.getCarrierName = function(success, failure) {
-	cordova.exec(success, failure, "PhoneListener", "carrier_name", []);
+PhoneListener.prototype.getSimInfo = function(success, failure) {
+	cordova.exec(success, failure, "PhoneListener", "sim_info", []);
 };
 
 // Plug in to Cordova
