@@ -1,6 +1,13 @@
 package com.badrit.PhoneListener;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
+import android.telephony.CellIdentityGsm;
+import android.telephony.CellInfo;
+import android.telephony.CellInfoGsm;
+import android.telephony.CellSignalStrengthGsm;
+import android.telephony.NeighboringCellInfo;
 import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
@@ -13,19 +20,21 @@ import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class PhoneListener extends CordovaPlugin {
 
     private Context context;
     private CallbackContext callbackContext;
     private JSONObject data;
+    private JSONObject simInfo;
 
     @Override
     public boolean execute(String action, JSONArray data,
                            CallbackContext callbackContext) {
-        this.callbackContext = callbackContext;
-        this.context = cordova.getActivity().getApplicationContext();
-
         if (action.equals("monitor_signal")) {
+            this.callbackContext = callbackContext;
+            this.context = cordova.getActivity().getApplicationContext();
             monitorSignal();
 
             PluginResult r = new PluginResult(PluginResult.Status.OK, data);
@@ -33,12 +42,17 @@ public class PhoneListener extends CordovaPlugin {
             callbackContext.sendPluginResult(r);
         }
 
+        if (action.equals("sim_info")) {
+            getSimInfo();
+            callbackContext.success(simInfo);
+        }
+
         return true;
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void monitorSignal(){
         TelephonyManager phonyManager  = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
-
         PhoneStateListener mListener = new PhoneStateListener(){
             @Override
             public void onSignalStrengthsChanged(SignalStrength signalStrength) {
@@ -76,8 +90,56 @@ public class PhoneListener extends CordovaPlugin {
         Toast.makeText(context, "Monitoring Start", Toast.LENGTH_SHORT).show();
     }
 
-    public void getNetworkSignalStrength()
-    {
-
+    public void getSimInfo(){
+        TelephonyManager phonyManager  = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+        try {
+            simInfo = new JSONObject();
+            simInfo.put("carrier_name", phonyManager.getNetworkOperatorName());
+            simInfo.put("network_operator", phonyManager.getNetworkOperator());
+            String phoneType = "";
+            switch(phonyManager.getPhoneType()) {
+                case 0:
+                    phoneType = "NONE";
+                    break;
+                case 1:
+                    phoneType = "GSM";
+                    break;
+                case 2:
+                    phoneType = "CDMA";
+                    break;
+                case 3:
+                    phoneType = "SIP";
+                    break;
+            }
+            simInfo.put("phone_type", phoneType);
+            simInfo.put("simSerial_number", phonyManager.getSimSerialNumber());
+            simInfo.put("subscriber_id", phonyManager.getSubscriberId());
+            String simState = "";
+            switch(phonyManager.getSimState()) {
+            case 0:
+                simState = "UNKNOWN";
+                break;
+            case 1:
+                simState = "ABSENT";
+                break;
+            case 2:
+                simState = "PIN REQUIRED";
+                break;
+            case 3:
+                simState = "PUK REQUIRED";
+                break;
+            case 4:
+                simState = "NETWORK LOCKED";
+                break;
+            case 5:
+                simState = "READY";
+                break;
+            }
+            simInfo.put("sim_state", simState);
+            Log.d("simInfo", phonyManager.toString());
+        } catch (Exception e) {
+            Log.v("ContactPicker", "Parsing contact failed: " + e.getMessage());
+            callbackContext.error("Parsing contact failed: " + e.getMessage());
+        }
     }
 }
